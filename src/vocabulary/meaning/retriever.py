@@ -1,12 +1,23 @@
-from requests_html import HTMLSession
+# pipfrom requests_html import HTMLSession
+import urllib.request
+import urllib.parse
 import json
 import re
 
 
+# def retrieve_json_meaning(word):
+#     http_request = "https://jisho.org/api/v1/search/words?keyword=" + word
+#     json_meaning = HTMLSession().get(http_request)
+#     return json_meaning.json()
+
+
+
 def retrieve_json_meaning(word):
-    http_request = "https://jisho.org/api/v1/search/words?keyword=" + word
-    json_meaning = HTMLSession().get(http_request)
-    return json_meaning.json()
+    http_request = "https://jisho.org/api/v1/search/words?keyword=" + urllib.parse.quote(word)
+    with urllib.request.urlopen(http_request) as response:
+        json_meaning = json.loads(response.read().decode('utf-8'))
+    return json_meaning
+
 
 
 def retrieve_json_meaning_quick_init(word):

@@ -50,7 +50,7 @@ class VocabularyTableView(QTableView):
         
         self._configure_header_section()
         
-        with open("styles/table_view.css", "r") as css_file:
+        with open("C:/Users/ids/AppData/Roaming/Anki2/addons21/kanji_app/styles/table_view.css", "r") as css_file:
             self.setStyleSheet(css_file.read())
 
         self.vocabulary_manager = vocabulary_manager

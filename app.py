@@ -3,25 +3,25 @@ import sys
 from PyQt6.QtGui import QFont
 from PyQt6.QtWidgets import QApplication
 
-from src.vocabulary.manager import VocabularyManager
-from src.gui.main_window import MainWindow
-from src.anki import AnkiManager
+from .src.vocabulary.manager import VocabularyManager
+from .src.gui.main_window import MainWindow
+from .src.anki import AnkiManager
 
 
-class App(QApplication):
+class App():
     def __init__(self):
-        super().__init__(sys.argv)
+        # super().__init__(sys.argv)
         anki_manager = AnkiManager()
         self.vocabulary_manager = VocabularyManager(anki_manager)
 
+        self.main_window = MainWindow(self.vocabulary_manager)
         font = QFont()
         font.setPointSize(11)
-        self.setFont(font)
-        self.main_window = MainWindow(self.vocabulary_manager)
+        self.main_window.setFont(font)
 
     def start(self):
         self.main_window.show()
-        sys.exit(self.exec())
+        # sys.exit(self.exec())
 
     def quick_init(self, words_file):
         path = "data/input/" + words_file

@@ -1,3 +1,5 @@
+from os import path
+
 from PyQt6.QtWidgets import QTextEdit, QSizePolicy
 from PyQt6.QtCore import QSize
 
@@ -23,7 +25,13 @@ class CardTextView(QTextEdit):
             QSizePolicy.Policy.Expanding,
             QSizePolicy.Policy.Expanding)
 
-        with open("styles/card/text_view.css", "r") as css_file:
+        addon_base_dir = path.realpath(__file__)
+        for i in range(5):
+            addon_base_dir = path.dirname(addon_base_dir)
+
+        css_file_path = path.join(addon_base_dir, "styles", "card", "text_view.css")
+
+        with open(css_file_path, "r") as css_file: 
             self.setStyleSheet(css_file.read())
 
     def set_card_view(self, sentence: Sentence):

@@ -1,14 +1,20 @@
+from os import path
 from PyQt6.QtWidgets import QTableView, QHeaderView
 
 from .menu import KanjiTableViewMenu
-
 
 class KanjiTableView(QTableView):
     def __init__(self, parent) -> None:
         super().__init__(parent)
         self.horizontalHeader().setSectionResizeMode(
             QHeaderView.ResizeMode.ResizeToContents)
-        with open("styles/table_view.css", "r") as css_file:
+        
+        addon_base_dir = path.realpath(__file__)
+        for i in range(7):
+            addon_base_dir = path.dirname(addon_base_dir)
+
+        css_file_path = path.join(addon_base_dir, "styles", "table_view.css")
+        with open(css_file_path, "r") as css_file: 
             self.setStyleSheet(css_file.read())
         self.menu = KanjiTableViewMenu(self)
 
@@ -24,8 +30,8 @@ class KanjiTableView(QTableView):
         self.horizontalHeader().setStretchLastSection(True)
 
     def set_to_new_sentence(self, sentence):
-        self.kanji_data = sentence.kanji_data
-        self.setModel(sentence.kanji_data.model)
+        self.kanji_data = sentence.kanji_data_list
+        self.setModel(sentence.kanji_data_list.model)
         self.resizeEvent(None)
 
     def contextMenuEvent(self, event):

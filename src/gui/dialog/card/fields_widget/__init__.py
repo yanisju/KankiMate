@@ -1,3 +1,5 @@
+from os import path
+
 from PyQt6.QtWidgets import QVBoxLayout, QGroupBox, QSizePolicy
 from PyQt6.QtCore import QSize
 from .sentence_attributes import SentenceAttributesWidget
@@ -9,7 +11,13 @@ class FieldsWidget(QGroupBox):
         super().__init__(parent)
         self.card_view = card_view
 
-        with open("styles/fields_group_box.css", "r") as css_file:
+        addon_base_dir = path.realpath(__file__)
+        for i in range(6):
+            addon_base_dir = path.dirname(addon_base_dir)
+
+        css_file_path = path.join(addon_base_dir, "styles", "fields_group_box.css")
+
+        with open(css_file_path, "r") as css_file:
             self.setStyleSheet(css_file.read())
 
         self.setSizePolicy(

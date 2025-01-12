@@ -4,7 +4,7 @@ from .sentence.manager import SentenceManager
 from .model.vocabulary import VocabularyModel
 from ..constants.exceptions import VocabularyAlreadyExists, VocabularyIsNotValid
 
-from src.anki import AnkiManager
+from ..anki import AnkiManager
 
 from .str_utils import is_word_romaji_kana_or_kanji
 

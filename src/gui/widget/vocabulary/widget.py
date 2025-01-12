@@ -1,3 +1,5 @@
+from os import path
+
 from PyQt6.QtCore import QSize
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QSizePolicy, QGroupBox 
 
@@ -18,7 +20,13 @@ class VocabularyWidget(QGroupBox):
         super().__init__(parent)
 
         self.setProperty("class", "styledParent")
-        with open("styles/group_box.css", "r") as css_file:
+
+        addon_base_dir = path.realpath(__file__)
+        for i in range(5):
+            addon_base_dir = path.dirname(addon_base_dir)
+
+        css_file_path = path.join(addon_base_dir, "styles", "group_box.css")
+        with open(css_file_path, "r") as css_file:
             self.setStyleSheet(css_file.read())
 
         self.setSizePolicy(
