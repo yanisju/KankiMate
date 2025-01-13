@@ -2,6 +2,7 @@ from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QWidget, QHBoxLayout, QLabel, QPushButton
 
 from .button.deck_options import DeckOptionsButtons
+from .button.generate_deck import GenerateDeckButton
 from ....vocabulary.manager import VocabularyManager
 from ....constants import SentenceWidgetMode
 
@@ -21,20 +22,9 @@ class SentenceHeader(QWidget):
         layout.addWidget(label)
 
         if mode == SentenceWidgetMode.ADDED_SENTENCE:
-            self.generate_deck_button = QPushButton("Generate Deck")
-            self.generate_deck_button.setEnabled(False)
-            self.generate_deck_button.clicked.connect(
-                vocabulary_manager.generate_deck)
-            vocabulary_manager.sentence_added_to_deck.sentences_model.modified.connect(
-                self.enable_disable_generate_deck_button)
+            self.generate_deck_button = GenerateDeckButton(self, vocabulary_manager)
             layout.addWidget(self.generate_deck_button)
 
             self.deck_options_button = DeckOptionsButtons(
                 self, vocabulary_manager.anki_manager)
             layout.addWidget(self.deck_options_button)
-
-    def enable_disable_generate_deck_button(self):
-        if len(self.vocabulary_manager.sentence_added_to_deck) == 0:
-            self.generate_deck_button.setEnabled(False)
-        else:
-            self.generate_deck_button.setEnabled(True)

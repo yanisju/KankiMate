@@ -1,7 +1,6 @@
 from PyQt6.QtWidgets import QPushButton
 
 from ....dialog.deck_options import DeckOptionsDialog
-# from ..sentence import SentenceWidget
 
 from .....anki import AnkiManager
 

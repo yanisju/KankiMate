@@ -43,7 +43,7 @@ class CardTextView(QTextEdit):
         card_text = get_text(self.sentence_attributes)
         self.setHtml(card_text)
 
-    def set_card_view_from_attributes_values(self, attributes_values):
+    def set_card_view_from_attributes_values(self, attributes_values: list):
         """Refresh view, based on card fields values."""
         self.attributes_values = attributes_values
         card_text = get_text(attributes_values)
