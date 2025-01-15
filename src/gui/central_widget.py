@@ -1,8 +1,8 @@
 from PyQt6.QtWidgets import QVBoxLayout, QHBoxLayout, QWidget
 
-from .widget.vocabulary.widget import VocabularyWidget
-from .widget.sentence.widget import SentenceWidget
-from .widget.sentence_rendering.widget import SentenceRenderingWidget
+from .widget.vocabulary import VocabularyWidget
+from .widget.sentence import SentenceWidget
+from .widget.sentence_rendering import SentenceRenderingWidget
 
 from .dialog.card import CardDialog
 

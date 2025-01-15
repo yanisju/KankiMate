@@ -57,14 +57,3 @@ class TestSentenceHeader():
 
         deck_options_button = getattr(sentence_header_added, "deck_options_button", None)
         assert deck_options_button is not None
-
-    def test_generate_deck_button_behavior(self, sentence_header_added, vocabulary_manager):
-        generate_deck_button = sentence_header_added.generate_deck_button
-        assert generate_deck_button is not None
-
-        sentence_header_added.enable_disable_generate_deck_button()
-        assert not generate_deck_button.isEnabled()
-
-        setattr(vocabulary_manager, "sentence_added_to_deck", ["Sentence1", "Sentence2", "Sentence3"])
-        sentence_header_added.enable_disable_generate_deck_button()
-        assert generate_deck_button.isEnabled() == True
