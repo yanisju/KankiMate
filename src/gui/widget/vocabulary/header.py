@@ -1,4 +1,5 @@
-from PyQt6.QtWidgets import QWidget, QHBoxLayout, QLabel
+from PyQt6.QtWidgets import QWidget, QHBoxLayout, QLabel, QSizePolicy
+from PyQt6.QtCore import QSize
 
 from .button.add_word import AddWordWidget
 
@@ -13,6 +14,13 @@ class VocabularyHeader(QWidget):
         label.setProperty("class", "title")
         layout.addWidget(label)
 
+        self.setSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
+
         add_word_button = AddWordWidget(
             vocabulary_manager, vocabulary_list_view)
         layout.addWidget(add_word_button)
+
+    def sizeHint(self):
+        width = int(self.parentWidget().width())
+        height = int(self.parentWidget().height() * 0.2)
+        return QSize(width, height)

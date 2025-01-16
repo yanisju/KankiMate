@@ -1,12 +1,21 @@
 QGroupBox {
-    background-color: #E0E0E0;
+    background-color: #444444;
     border: 1px solid #66666660;
     border-radius: 6px;
 }
 
-QLineEdit{
-    font-size: 23px; 
-    color: #333; 
+QLabel.title{
+    font-size: 22px; 
+    font-weight: bold; 
+    color: #ffffffff;
+    padding-bottom: 0px;
+    padding-top: 0px;
+    padding-left: 0px;
+}
+
+QLineEdit, QLabel.attributes, QPushButton{
+    font-size: 18px; 
+    color: #ffffffff; 
     font-family: "IPAex Mincho";
 }
 
@@ -16,17 +25,4 @@ QCombobox{
     font-family: "IPAex Mincho";
 }
 
-QLabel.title{
-    font-size: 25px; 
-    font-weight: bold; 
-    color: #333;
-    padding-bottom: 5px;
-    padding-top: 0px;
-    padding-left: 0px;
-}
 
-QLabel.attributes, QPushButton{
-    font-size: 20px; 
-    color: #333;
-    padding-bottom: 2px;
-}

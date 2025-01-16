@@ -1,5 +1,6 @@
 from os import path
 from PyQt6.QtWidgets import QTableView, QHeaderView
+from PyQt6.QtCore import QSize
 
 from .menu import VocabularyTableViewMenu
 from ....dialog.meaning import MeaningDialog
@@ -152,3 +153,8 @@ class VocabularyTableView(QTableView):
     def resizeEvent(self, event):
         super().resizeEvent(event)
         self._configure_header_section()
+
+    def sizeHint(self):
+        width = int(self.parentWidget().width())
+        height = int(self.parentWidget().height() * 0.8)
+        return QSize(width, height)
