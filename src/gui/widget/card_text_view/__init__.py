@@ -29,7 +29,7 @@ class CardTextView(QTextEdit):
         for i in range(5):
             addon_base_dir = path.dirname(addon_base_dir)
 
-        css_file_path = path.join(addon_base_dir, "styles", "card", "text_view.css")
+        css_file_path = path.join(addon_base_dir, "styles", "text_view.css")
 
         with open(css_file_path, "r") as css_file: 
             self.setStyleSheet(css_file.read())

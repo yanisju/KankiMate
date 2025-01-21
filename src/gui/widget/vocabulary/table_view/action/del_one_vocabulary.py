@@ -1,3 +1,4 @@
+from os import path
 from PyQt6.QtGui import QAction, QIcon
 
 
@@ -13,7 +14,14 @@ class DeleteVocabularyAction(QAction):
         self.sentence_rendering_widget = sentence_rendering_widget
         self.sentence_table_view = sentence_table_view
         self.setText("Delete Vocabulary")
-        self.setIcon(QIcon("data/icons/minus.png"))
+
+        addon_base_dir = path.realpath(__file__)
+        for i in range(7):
+            addon_base_dir = path.dirname(addon_base_dir)
+
+        icon_file_path = path.join(addon_base_dir, "data", "icons", "minus.png")
+        self.setIcon(QIcon(icon_file_path))
+
         self.triggered.connect(self._action)
 
     def _action(self):

@@ -22,7 +22,7 @@ class KanjiTableView(QTableView):
         self.horizontalHeader().setSectionResizeMode(
             QHeaderView.ResizeMode.Fixed)
         
-        width = self.parentWidget().width()
+        width = self.horizontalHeader().width()
         self.setColumnWidth(0, int(width * 0.15))
         self.setColumnWidth(1, int(width * 0.15))
         self.setColumnWidth(2, int(width * 0.7))

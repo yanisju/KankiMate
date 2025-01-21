@@ -1,3 +1,5 @@
+from os import path
+
 from PyQt6.QtWidgets import QMenu
 
 from .action.del_one_vocabulary import DeleteVocabularyAction
@@ -19,6 +21,15 @@ class VocabularyTableViewMenu(QMenu):
         self.vocabulary_manager = vocabulary_manager
         self.row = -1
         self.column = -1
+
+        addon_base_dir = path.realpath(__file__)
+        for i in range(6):
+            addon_base_dir = path.dirname(addon_base_dir)
+
+        css_file_path = path.join(addon_base_dir, "styles", "menu.css")
+
+        with open(css_file_path, "r") as css_file:
+            self.setStyleSheet(css_file.read())
 
         self.set_actions(
             vocabulary_manager,

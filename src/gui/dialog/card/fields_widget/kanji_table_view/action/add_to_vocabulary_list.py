@@ -1,5 +1,6 @@
-from PyQt6.QtGui import QAction, QIcon
+from os import path
 
+from PyQt6.QtGui import QAction, QIcon
 from PyQt6.QtWidgets import QMessageBox
 
 
@@ -7,7 +8,14 @@ class AddToVocabularyListAction(QAction):
     def __init__(self, parent) -> None:
         super().__init__(parent)
         self.setText("Add to Vocabulary List")
-        self.setIcon(QIcon("data/icons/plus.png"))
+        
+        addon_base_dir = path.realpath(__file__)
+        for i in range(8):
+            addon_base_dir = path.dirname(addon_base_dir)
+
+        icon_file_path = path.join(addon_base_dir, "data", "icons", "plus.png")
+        self.setIcon(QIcon(icon_file_path))
+
         self.triggered.connect(self._action)
 
     def _action(self):
