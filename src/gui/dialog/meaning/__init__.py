@@ -1,11 +1,11 @@
 from os import path
 
-from PyQt6.QtWidgets import QWidget, QDialog, QHBoxLayout, QVBoxLayout, QPushButton
+from PyQt6.QtWidgets import QWidget, QDialog, QVBoxLayout
 from PyQt6.QtGui import QStandardItemModel
 from PyQt6.QtCore import pyqtSignal
 
-from .widget.header import DialogMeaningHeader
-from .widget.meaning import MeaningWidget
+from .body import DialogMeaningBody
+from .bottom import DialogMeaningBottom
 
 
 class MeaningDialog(QDialog):
@@ -33,28 +33,11 @@ class MeaningDialog(QDialog):
         layout = QVBoxLayout(self)  # Main layout of Dialog
         self.setLayout(layout)
 
-        self.header = DialogMeaningHeader(self)
-        layout.addWidget(self.header)
+        self.body = DialogMeaningBody(self)
+        layout.addWidget(self.body)
 
-        self.meaning_widget = MeaningWidget(self)
-        layout.addWidget(self.meaning_widget)
-
-        buttons_layout = QHBoxLayout()  # Layout for bottom buttons
-        layout.addLayout(buttons_layout)
-        self._init_buttons_layout(buttons_layout)
-
-    def _init_buttons_layout(self, layout):
-        self.confirm_button = QPushButton("Confirm")
-        cancel_button = QPushButton("Cancel")
-        layout.addWidget(self.confirm_button)
-        layout.addWidget(cancel_button)
-        self.confirm_button.clicked.connect(self._confirm_button_clicked)
-        cancel_button.clicked.connect(self.reject)
-
-    def _confirm_button_clicked(self):
-        self.confirm_button_clicked_signal.emit(self.table_view.model(),
-                                                self.current_selection)
-        self.accept()
+        self.bottom = DialogMeaningBottom(self)
+        layout.addWidget(self.bottom)
 
     def open(self, vocabulary):
         self.vocabulary = vocabulary
@@ -63,9 +46,9 @@ class MeaningDialog(QDialog):
         self.current_selection = meaning_object.current_selection
         self.meaning_model = meaning_object.clone_model()
         
-        self.meaning_widget.set_to_new_vocabulary(self.meaning_model)
+        self.body.set_to_new_vocabulary(self.meaning_model)
 
-        self.header.selection_spin_box.refresh(
+        self.bottom.spin_box.refresh(
             self.current_selection,
             self.meaning_model.rowCount())
         super().open()

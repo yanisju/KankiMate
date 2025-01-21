@@ -13,15 +13,16 @@ QLabel.title{
     padding-left: 0px;
 }
 
-QLineEdit, QLabel.attributes, QPushButton{
-    font-size: 18px; 
+QLineEdit, QLabel.attributes, QPushButton, QSpinBox{
+    font-size: 20px; 
     color: #ffffffff; 
     font-family: "IPAex Mincho";
 }
 
-QCombobox{
+QCombobox, VocabularyComboBox{
     font-size: 20px; 
-    color: #333; 
+    background-color: #444444;
+    color: #ffffffff; 
     font-family: "IPAex Mincho";
 }
 

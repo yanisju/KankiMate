@@ -105,8 +105,8 @@ class VocabularyTableView(QTableView):
         width = self.horizontalHeader().width()
         self.setColumnWidth(0, int(width * 0.10))
         self.setColumnWidth(1, int(width * 0.65))
-        self.setColumnWidth(2, int(width * 0.15))
-        self.setColumnWidth(3, int(width * 0.10))
+        self.setColumnWidth(2, int(width * 0.20))
+        self.setColumnWidth(3, int(width * 0.05))
         
         self.horizontalHeader().setStretchLastSection(True)
 

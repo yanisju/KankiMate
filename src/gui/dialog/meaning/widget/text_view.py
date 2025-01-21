@@ -11,7 +11,7 @@ class MeaningTextView(QTextEdit):
 
     def set_text(self, model: QStandardItemModel):
         addon_base_dir = path.realpath(__file__)
-        for i in range(7):
+        for i in range(6):
             addon_base_dir = path.dirname(addon_base_dir)
 
         html_file_path = path.join(addon_base_dir, "styles", "meaning", "text_view.html")
@@ -35,6 +35,6 @@ class MeaningTextView(QTextEdit):
         """
     
     def sizeHint(self):
-        width = int(self.parentWidget().width() * 0.4)
-        height = int(self.parentWidget().height())
+        width = int(self.parentWidget().width())
+        height = int(self.parentWidget().height() * 0.6)
         return QSize(width, height)

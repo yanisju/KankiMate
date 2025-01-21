@@ -9,10 +9,10 @@ class MeaningTableView(QTableView):
         super().__init__(parent)
 
         addon_base_dir = path.realpath(__file__)
-        for i in range(7):
+        for i in range(6):
             addon_base_dir = path.dirname(addon_base_dir)
 
-        css_file_path = path.join(addon_base_dir, "styles", "meaning", "table_view.css")
+        css_file_path = path.join(addon_base_dir, "styles", "table_view.css")
 
         with open(css_file_path, "r") as css_file:
             self.setStyleSheet(css_file.read())
@@ -28,8 +28,8 @@ class MeaningTableView(QTableView):
         self.horizontalHeader().setStretchLastSection(True)
         
     def sizeHint(self):
-        width = int(self.parentWidget().width() * 0.6)
-        height = int(self.parentWidget().height())
+        width = int(self.parentWidget().width())
+        height = int(self.parentWidget().height() * 0.4)
         return QSize(width, height)
     
     def resizeEvent(self, event):

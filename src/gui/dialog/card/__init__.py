@@ -1,3 +1,5 @@
+from os import path
+
 from PyQt6.QtWidgets import QDialog, QHBoxLayout, QVBoxLayout, QPushButton
 from PyQt6.QtCore import QSize
 from PyQt6.QtCore import pyqtSignal
@@ -19,19 +21,24 @@ class CardDialog(QDialog):
         self.setWindowTitle("Anki Card Editor")
         self._init_layout()
 
+        addon_base_dir = path.realpath(__file__)
+        for i in range(5):
+            addon_base_dir = path.dirname(addon_base_dir)
+        css_file_path = path.join(addon_base_dir, "styles", "group_box.css")
+
+        with open(css_file_path, "r") as css_file:
+            self.setStyleSheet(css_file.read())
+
     def _init_layout(self):
         layout = QVBoxLayout(self)
 
-        card_layout = QHBoxLayout() 
-        layout.addLayout(card_layout)
-
         # TextEdit to view current card in Anki
         self.card_view = CardTextView(CardTextViewMode.IS_NOT_MAIN_WINDOW)
-        card_layout.addWidget(self.card_view)
-
+        
         # Widget to modify card attributes / Modify card view
         self.fields_widget = FieldsWidget(self, self.card_view)
-        card_layout.addWidget(self.fields_widget)
+        layout.addWidget(self.fields_widget)
+        layout.addWidget(self.card_view)
 
         buttons_layout = QHBoxLayout()  # Layout for bottom buttons
         layout.addLayout(buttons_layout)
@@ -96,6 +103,6 @@ class CardDialog(QDialog):
         super().open()
 
     def sizeHint(self):
-        width = int(self.central_widget.parent().width() * 0.7)
-        height = int(self.central_widget.parent().height() * 0.7)
+        width = int(self.central_widget.parent().width() * 0.85)
+        height = int(self.central_widget.parent().height() * 0.85)
         return QSize(width, height)
