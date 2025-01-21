@@ -2,9 +2,7 @@ import pytest
 from PyQt6.QtWidgets import QWidget
 
 from src.gui.central_widget import CentralWidget
-from src.gui.widget.sentence.widget import SentenceWidget
-from src.gui.widget.sentence.table_view import SentenceTableView
-from src.gui.widget.sentence.header import SentenceHeader
+from src.gui.widget.sentence import SentenceWidget
 from src.constants import CardTextViewMode, SentenceWidgetMode
 from src.gui.widget.card_text_view import CardTextView
 from src.gui.dialog.card import CardDialog

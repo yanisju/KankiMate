@@ -31,6 +31,9 @@ class SentenceTableView(QTableView):
         self.horizontalHeader().setSectionResizeMode(
             QHeaderView.ResizeMode.ResizeToContents)
 
+        self.setSelectionBehavior(QTableView.SelectionBehavior.SelectItems)
+        self.setSelectionMode(QTableView.SelectionMode.SingleSelection)
+
         self.menu = SentenceTableViewMenu(
             self,
             vocabulary_manager,

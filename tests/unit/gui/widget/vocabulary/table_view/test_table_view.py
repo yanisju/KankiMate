@@ -4,7 +4,6 @@ from src.anki import AnkiManager
 from src.vocabulary.manager import VocabularyManager
 
 from PyQt6.QtWidgets import QWidget, QTableView
-from PyQt6.QtCore import QModelIndex
 from src.gui.widget.vocabulary.table_view import VocabularyTableView
 from src.gui.dialog.card import CardDialog
 from src.gui.widget.sentence_rendering import SentenceRenderingWidget

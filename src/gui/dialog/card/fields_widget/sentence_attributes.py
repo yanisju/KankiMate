@@ -77,7 +77,7 @@ class SentenceAttributesWidget(QWidget):
     def _is_word1_attribute_modified(self):
         try:
             word1_row = self.widget_list[2].currentIndex()
-            kanji1_data = self.sentence.kanji_data[word1_row]
+            kanji1_data = self.sentence.kanji_data_list[word1_row]
             self.attributes_value[2] = kanji1_data
         except BaseException:
             self.attributes_value[2] = None
@@ -90,10 +90,10 @@ class SentenceAttributesWidget(QWidget):
         try:
             kanji2_row = self.widget_list[3].currentIndex()
             if kanji2_row == len(
-                    self.sentence.kanji_data):  # If word2 selection is set to None
+                    self.sentence.kanji_data_list):  # If word2 selection is set to None
                 kanji2_data = None
             else:
-                kanji2_data = self.sentence.kanji_data[kanji2_row]
+                kanji2_data = self.sentence.kanji_data_list[kanji2_row]
             self.attributes_value[3] = kanji2_data
         except BaseException:
             self.attributes_value[3] = None
@@ -109,7 +109,7 @@ class SentenceAttributesWidget(QWidget):
 
     def set_to_new_sentence(self, sentence):
         self.sentence = sentence
-        self.sentence.kanji_data.model.itemChanged.connect(
+        self.sentence.kanji_data_list.model.itemChanged.connect(
             self._kanji_data_model_is_modified)
         self.attributes_value = [None, None, None, None]
         for i in range(2):
@@ -118,15 +118,15 @@ class SentenceAttributesWidget(QWidget):
             self.widget_list[i].setCursorPosition(0)
 
         self.word1_combobox.set_kanji_data_model(
-            sentence.kanji_data.first_combobox_model)
+            sentence.kanji_data_list.first_combobox_model)
         self.word2_combobox.set_kanji_data_model(
-            sentence.kanji_data.second_combobox_model)
+            sentence.kanji_data_list.second_combobox_model)
 
         if sentence.word1_data is None:
             self.widget_list[2].set_to_empty_value()
         else:
             word1_kanji = sentence.word1_data.word
-            word1_index = sentence.kanji_data._find_kanji_index(word1_kanji)
+            word1_index = sentence.kanji_data_list._find_kanji_index(word1_kanji)
             self.widget_list[2].setCurrentIndex(word1_index)
             self._is_word1_attribute_modified()
 
@@ -134,10 +134,10 @@ class SentenceAttributesWidget(QWidget):
             self.widget_list[3].set_to_empty_value()
         else:
             word2_kanji = sentence.word2_data.word
-            word2_index = sentence.kanji_data._find_kanji_index(word2_kanji)
+            word2_index = sentence.kanji_data_list._find_kanji_index(word2_kanji)
             self.widget_list[3].setCurrentIndex(word2_index)
 
-        self.sentence.kanji_data.model.row_deleted.connect(
+        self.sentence.kanji_data_list.model.row_deleted.connect(
             self._is_word1_attribute_modified)
-        self.sentence.kanji_data.model.row_deleted.connect(
+        self.sentence.kanji_data_list.model.row_deleted.connect(
             self._is_word2_attribute_modified)
