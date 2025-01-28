@@ -46,7 +46,7 @@ class CardDialog(QDialog):
 
     def _init_buttons_layout(self, layout):
         self.confirm_button = QPushButton("Confirm")
-        self.confirm_and_add_button = QPushButton("Confirm and Add to Deck")
+        self.confirm_and_add_button = QPushButton("Confirm and Add to Queue")
         cancel_button = QPushButton("Cancel")
         layout.addWidget(self.confirm_button)
         layout.addWidget(self.confirm_and_add_button)

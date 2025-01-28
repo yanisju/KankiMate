@@ -49,7 +49,7 @@ class TestSentenceHeader():
     def test_initialization_added_sentence(self, sentence_header_added):
         label = sentence_header_added.findChild(QLabel)
         assert label is not None
-        assert label.text() == "Added Sentence List"
+        assert label.text() == "Queue Sentence List"
 
         generate_deck_button = sentence_header_added.findChild(QPushButton)
         assert generate_deck_button is not None

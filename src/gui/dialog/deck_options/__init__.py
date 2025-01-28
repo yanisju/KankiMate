@@ -14,7 +14,7 @@ class DeckOptionsDialog(QDialog):
     def __init__(self, parent: QWidget, anki_manager: AnkiManager) -> None:
         super().__init__(parent)
         self.anki_manager = anki_manager
-        self.setWindowTitle("Deck Options")
+        self.setWindowTitle("Deck and Model Options")
 
         self.modified = False
 

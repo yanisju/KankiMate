@@ -15,7 +15,7 @@ class SentenceHeader(QWidget):
         if mode == SentenceWidgetMode.VOCABULARY_SENTENCE:
             label_name = "Sentence List"
         else:
-            label_name = "Added Sentence List"
+            label_name = "Queue Sentence List"
         label = QLabel(label_name, self)
         label.setProperty("class", "title")
         label.setAlignment(Qt.AlignmentFlag.AlignLeft)

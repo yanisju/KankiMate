@@ -14,7 +14,7 @@ class AddWordWidget(QWidget):
 
         formLayout = QFormLayout()
         self.line_edit = QLineEdit()
-        label = QLabel("Enter Kanji:")
+        label = QLabel("Enter Vocabulary:")
         label.setProperty("class", "attributes")
         formLayout.addRow(label, self.line_edit)
         self.button = QPushButton("  Confirm  ")

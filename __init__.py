@@ -8,6 +8,6 @@ def appStart() -> None:
     app.start()
 
 app = App()
-action = QAction("test", mw)
+action = QAction("KankiMate", mw)
 qconnect(action.triggered, appStart)
 mw.form.menuTools.addAction(action)

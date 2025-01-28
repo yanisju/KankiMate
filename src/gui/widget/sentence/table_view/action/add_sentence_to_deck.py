@@ -6,7 +6,7 @@ class AddSentenceToDeckAction(QAction):
     def __init__(self, parent, vocabulary_manager):
         super().__init__(parent)
         self.vocabulary_manager = vocabulary_manager
-        self.setText("Add Sentence To Deck")
+        self.setText("Add to Queue")
 
         addon_base_dir = path.realpath(__file__)
         for i in range(7):

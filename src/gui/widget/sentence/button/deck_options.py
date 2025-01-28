@@ -7,7 +7,7 @@ from .....anki import AnkiManager
 
 class DeckOptionsButtons(QPushButton):
     def __init__(self, parent, anki_manager: AnkiManager):
-        super().__init__("Deck Options", parent)
+        super().__init__("Options", parent)
         self.deck_option_dialog = DeckOptionsDialog(
             self.parent(), anki_manager)
         self.clicked.connect(self.deck_option_dialog.open)

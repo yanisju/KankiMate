@@ -3,7 +3,7 @@ from .....vocabulary.manager import VocabularyManager
 
 class GenerateDeckButton(QPushButton):
     def __init__(self, parent, vocabulary_manager: VocabularyManager):
-        super().__init__("Generate Deck", parent)
+        super().__init__("Save to Deck", parent)
         self.setEnabled(False)
         self.vocabulary_manager = vocabulary_manager
 
