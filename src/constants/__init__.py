@@ -14,4 +14,9 @@ class KanjiDataComboBoxModelMode(Enum):
 
 class CardTextViewMode(Enum):
     IS_MAIN_WINDOW = 1
-    IS_NOT_MAIN_WINDOW = 2    
+    IS_NOT_MAIN_WINDOW = 2
+
+class ModelDialogOptionsMode(Enum):
+    FRONT_MODEL = 1
+    BACK_MODEL = 2
+    STYLE_MODEL = 3

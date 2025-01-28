@@ -2,28 +2,40 @@ QGroupBox {
     background-color: #444444;
     border: 1px solid #66666660;
     border-radius: 6px;
+    margin-top: 0;
+    padding-top: 0px;
 }
 
-QLabel.title{
+/* VocabularyHeader {
+    margin: 0px;
+} */
+
+QLabel.title {
     font-size: 22px; 
     font-weight: bold; 
     color: #ffffffff;
     padding-bottom: 0px;
     padding-top: 0px;
     padding-left: 0px;
+    margin-top: 0px;
 }
 
-QLineEdit, QLabel.attributes, QPushButton, QSpinBox{
+QLineEdit, QLabel.attributes, QPushButton, QSpinBox, QTextEdit{
     font-size: 20px; 
     color: #ffffffff; 
     font-family: "IPAex Mincho";
+    padding-top: 0px;
 }
 
-QCombobox, VocabularyComboBox{
+QPushButton:disabled {
+    background-color: #666666; 
+    color: #999999;          
+    border: 1px solid #666666;
+}
+
+QComboBox, VocabularyComboBox {
     font-size: 20px; 
     background-color: #444444;
     color: #ffffffff; 
     font-family: "IPAex Mincho";
 }
-
-

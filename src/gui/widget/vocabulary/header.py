@@ -11,13 +11,17 @@ class VocabularyHeader(QWidget):
         layout = QHBoxLayout(self)
         
         label = QLabel("Vocabulary List", self)
+        label.setContentsMargins(0,0,0,0)
         label.setProperty("class", "title")
         layout.addWidget(label)
 
         self.setSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
 
+        
         add_word_button = AddWordWidget(
             vocabulary_manager, vocabulary_list_view)
+        add_word_button.layout().setContentsMargins(0,0,0,0)
+        add_word_button.setContentsMargins(0,0,0,0)
         layout.addWidget(add_word_button)
 
     def sizeHint(self):

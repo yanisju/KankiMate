@@ -40,9 +40,12 @@ class VocabularyWidget(QGroupBox):
             sentence_rendering_widget,
             sentence_table_view)  # View for retrieved words
         layout.addWidget(vocabulary_list_view)
+        vocabulary_list_view.setContentsMargins(0,0,0,0)
 
         header = VocabularyHeader(self, vocabulary_manager, vocabulary_list_view)
         layout.insertWidget(0, header)
+        header.setContentsMargins(0,0,0,0)
+        header.layout().setContentsMargins(0,0,0,0)
 
     def sizeHint(self):
         width = int(self.parentWidget().width() * 0.6)

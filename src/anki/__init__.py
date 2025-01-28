@@ -1,55 +1,91 @@
-# import genanki
-
-from .notes import Notes
+from aqt import mw
+from aqt.utils import showInfo
 
 class AnkiManager:
     def __init__(self):
-        # self._model = self._get_model()
-        self.deck_id = 1301981488
-        self.deck_name = 'Test_Kanjis'
-        # self.notes = Notes(self._model)
+        self.field_names = ["Sentence", "Translation", "Vocabulary1", "Vocabulary1_translation", "Vocabulary2", "Vocabulary2_translation"]
 
-    # def _get_model(self):
-    #     # TODO: Modify and set as parameters
-    #     with open("data/parameters/template_front.txt", "r", encoding='utf-8') as file_template_front:
-    #         template_front = file_template_front.read()
-    #     with open("data/parameters/template_back.txt", "r", encoding='utf-8') as file_template_back:
-    #         template_back = file_template_back.read()
+    def is_model_existing(self, model_name):
+        models = mw.col.models
+        existing_model = models.by_name(model_name)
+        if existing_model:
+            return existing_model
+        else:
+            return False
+        
+    def is_model_existing_valid(self, model):
+        model_field_names = model.field_names
+        if model_field_names == self.field_names:
+            return True
+        else:
+            return False
+        
+    def modify_model_parameters(self, model_name: str, model_front: str, model_back: str, model_style: str):
+        models = mw.col.models
+        existing_model = mw.col.models.by_name(model_name)
+        existing_model["css"] = model_style
 
-    #     model = genanki.Model(
-    #         1422169361,
-    #         'Sentence_test',
-    #         fields=[
-    #             {'name': 'Sort'},
-    #             {'name': 'Expression'},
-    #             {'name': 'Meaning'},
-    #             {'name': 'Vocab1'},
-    #             {'name': 'Vocab1 Meaning'},
-    #             {'name': 'Vocab2'},
-    #             {'name': 'Vocab2 Meaning'},
-    #             {'name': 'Audio'},
-    #         ],
-    #         templates=[
-    #             {
-    #                 'name': 'Sentence',
-    #                 'qfmt': template_front,
-    #                 'afmt': template_back,
-    #             },  # TODO: Add "style" field / else won't display card correctly
-    #         ])
-    #     return model
+        for template in existing_model["tmpls"]:
+            template["qfmt"] = model_front
+            template["afmt"] = model_back
 
-    # def _get_deck(self, deck_id, deck_name):
-    #     deck = genanki.Deck(
-    #         deck_id,
-    #         deck_name)
-    #     return deck
+        models.save(existing_model)
 
-    # def generate_deck(self, sentence_manager):
-    #     self.notes.clear()
-    #     deck = self._get_deck(self.deck_id, self.deck_name)
-    #     for sentence in sentence_manager:
-    #         note = self.notes.add(sentence)
-    #         deck.add_note(note)
 
-    #     genanki.Package(deck).write_to_file(
-    #         'E:/Workspace/kanji_app/data/output/output.apkg')
+    def create_new_model(self, model_name: str, model_front: str, model_back: str, model_style: str):
+        models = mw.col.models
+        new_model = mw.col.models.new(model_name)
+        new_model["css"] = model_style
+
+        for field in self.field_names:
+            models.addField(new_model, models.new_field(field))
+
+        template = models.new_template("Normal")
+        template["qfmt"] = model_front
+        template["afmt"] = model_back
+
+        models.addTemplate(new_model, template)
+        models.add(new_model)
+
+        return new_model
+
+    def add_to_deck(self, sentence_manager):
+        col = mw.col
+
+        config = mw.addonManager.getConfig(__name__)
+
+        model_name = config["model_name"]
+
+        model = col.models.by_name(model_name)
+        if not model:
+            showInfo("Le modèle 'anki_test_new_model' n'existe pas.")
+            return
+
+        deck_name = config["deck_name"]
+        deck = col.decks.by_name("Test_kanjis")
+        if not deck:
+            showInfo("Le deck 'Test_kanjis' n'existe pas.")
+            return
+
+        col.models.set_current(model)
+
+
+        for sentence in sentence_manager:
+            note = col.newNote()
+
+            note.model()['id'] = model['id']  
+            note.model()['did'] = deck['id']  
+
+            note.fields[0] = sentence.sentence  
+            note.fields[1] = sentence.translation  
+            note.fields[2] = sentence.word1_data.word 
+            note.fields[3] = sentence.word1_data.meaning  
+            if sentence.word2_data:
+                note.fields[4] = sentence.word2_data.word  
+                note.fields[5] = sentence.word2_data.meaning
+
+            col.addNote(note)
+
+        col.save()
+
+        showInfo("Toutes les notes ont été ajoutées avec succès.")

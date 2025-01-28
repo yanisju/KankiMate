@@ -94,7 +94,7 @@ class VocabularyManager:
         return list(self.vocabularies).index(word)
 
     def generate_deck(self):
-        self.anki_manager.generate_deck(self.sentence_added_to_deck)
+        self.anki_manager.add_to_deck(self.sentence_added_to_deck)
 
     def _change_vocabulary_model_item(self, word: str, standard_item):
         index = self.get_index_by_word(word)
