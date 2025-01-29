@@ -1,5 +1,3 @@
-from os import path
-
 from PyQt6.QtCore import QSize
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QSizePolicy, QGroupBox
 
@@ -24,17 +22,7 @@ class SentenceWidget(QGroupBox):
 
         self.vocabulary_manager = vocabulary_manager
         self.mode = mode
-
-        addon_base_dir = path.realpath(__file__)
-        for i in range(5):
-            addon_base_dir = path.dirname(addon_base_dir)
-
-        css_file_path = path.join(addon_base_dir, "styles", "group_box.css")
-
-        with open(css_file_path, "r") as css_file:
-            self.setStyleSheet(css_file.read())
         
-
         self.setSizePolicy(
             QSizePolicy.Policy.Expanding,
             QSizePolicy.Policy.Expanding)
@@ -55,8 +43,8 @@ class SentenceWidget(QGroupBox):
     def sizeHint(self):
         if self.mode == SentenceWidgetMode.VOCABULARY_SENTENCE:
             width = int(self.parentWidget().width() * 0.6)
-            height = int(self.parentWidget().height() * 0.35)
+            height = int(self.parentWidget().height() * 0.4)
         else:
             width = int(self.parentWidget().width() * 0.4)
-            height = int(self.parentWidget().height() * 0.7)
+            height = int(self.parentWidget().height() * 0.75)
         return QSize(width, height)

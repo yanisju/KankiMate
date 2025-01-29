@@ -1,5 +1,3 @@
-from os import path
-
 from PyQt6.QtWidgets import QMenu
 from .action.open_card_editor import OpenMeaningEditorAction
 from .action.add_sentence_to_deck import AddSentenceToDeckAction
@@ -25,15 +23,6 @@ class SentenceTableViewMenu(QMenu):
         self.sentence_widget_mode = sentence_widget_mode
         self._actions = []
         self._set_actions(vocabulary_manager, card_text_view)
-
-        addon_base_dir = path.realpath(__file__)
-        for i in range(6):
-            addon_base_dir = path.dirname(addon_base_dir)
-
-        css_file_path = path.join(addon_base_dir, "styles", "menu.css")
-
-        with open(css_file_path, "r") as css_file:
-            self.setStyleSheet(css_file.read())
 
     def _set_actions(self, vocabulary_manager, card_text_view):
         """Set actions data and behaviors."""

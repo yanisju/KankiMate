@@ -1,5 +1,3 @@
-from os import path
-
 from PyQt6.QtWidgets import QMenu
 
 from .action.set_as_word1 import SetAsWord1Action
@@ -19,15 +17,6 @@ class KanjiTableViewMenu(QMenu):
         super().__init__(parent)
         self.rows_columns = []
         self._set_actions()
-
-        addon_base_dir = path.realpath(__file__)
-        for i in range(7):
-            addon_base_dir = path.dirname(addon_base_dir)
-
-        css_file_path = path.join(addon_base_dir, "styles", "menu.css")
-
-        with open(css_file_path, "r") as css_file:
-            self.setStyleSheet(css_file.read())
 
     def _set_actions(self):
         """Set actions data and behaviors."""

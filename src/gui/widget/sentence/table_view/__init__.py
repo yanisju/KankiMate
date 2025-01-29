@@ -1,5 +1,3 @@
-from os import path
-
 from PyQt6.QtWidgets import QTableView, QHeaderView
 
 from .menu import SentenceTableViewMenu
@@ -17,18 +15,11 @@ class SentenceTableView(QTableView):
             sentence_widget_mode):
         super().__init__(central_widget)
 
-        addon_base_dir = path.realpath(__file__)
-        for i in range(6):
-            addon_base_dir = path.dirname(addon_base_dir)
-
-        css_file_path = path.join(addon_base_dir, "styles", "table_view.css")
-
-        with open(css_file_path, "r") as css_file:
-            self.setStyleSheet(css_file.read())
-
         self.setEditTriggers(
             self.EditTrigger.NoEditTriggers)  # Disable editing
         self.horizontalHeader().setSectionResizeMode(
+            QHeaderView.ResizeMode.ResizeToContents)
+        self.verticalHeader().setSectionResizeMode(
             QHeaderView.ResizeMode.ResizeToContents)
 
         self.setSelectionBehavior(QTableView.SelectionBehavior.SelectItems)

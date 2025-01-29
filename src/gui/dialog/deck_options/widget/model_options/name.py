@@ -1,4 +1,4 @@
-from PyQt6.QtWidgets import QLabel, QFormLayout, QWidget, QTextEdit
+from PyQt6.QtWidgets import QLabel, QFormLayout, QWidget, QLineEdit
 
 class NameModelOptions(QWidget):
     def __init__(self, parent):
@@ -8,6 +8,6 @@ class NameModelOptions(QWidget):
 
         label = QLabel("Model Name: ")
         label.setProperty("class", "attributes")
-        self.text_edit = QTextEdit(self)
+        self.text_edit = QLineEdit(self)
 
         layout.addRow(label, self.text_edit)

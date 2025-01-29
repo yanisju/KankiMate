@@ -47,4 +47,5 @@ class CentralWidget(QWidget):
             SentenceWidgetMode.ADDED_SENTENCE)
         vocabulary_sentence_deck_layout.addWidget(added_sentence_widget)
 
-        layout.addWidget(sentence_rendering_widget)
+        # layout.addWidget(sentence_rendering_widget)
+        layout.addWidget(sentence_rendering_widget.card_text_view)

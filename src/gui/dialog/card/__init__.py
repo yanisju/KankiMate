@@ -1,5 +1,3 @@
-from os import path
-
 from PyQt6.QtWidgets import QDialog, QHBoxLayout, QVBoxLayout, QPushButton
 from PyQt6.QtCore import QSize
 from PyQt6.QtCore import pyqtSignal
@@ -20,14 +18,6 @@ class CardDialog(QDialog):
         self.vocabulary_manager = vocabulary_manager
         self.setWindowTitle("Anki Card Editor")
         self._init_layout()
-
-        addon_base_dir = path.realpath(__file__)
-        for i in range(5):
-            addon_base_dir = path.dirname(addon_base_dir)
-        css_file_path = path.join(addon_base_dir, "styles", "group_box.css")
-
-        with open(css_file_path, "r") as css_file:
-            self.setStyleSheet(css_file.read())
 
     def _init_layout(self):
         layout = QVBoxLayout(self)

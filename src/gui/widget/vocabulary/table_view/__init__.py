@@ -1,4 +1,3 @@
-from os import path
 from PyQt6.QtWidgets import QTableView, QHeaderView
 from PyQt6.QtCore import QSize
 
@@ -51,15 +50,6 @@ class VocabularyTableView(QTableView):
         super().__init__(parent)
         
         self._configure_header_section()
-        
-        addon_base_dir = path.realpath(__file__)
-        for i in range(6):
-            addon_base_dir = path.dirname(addon_base_dir)
-
-        css_file_path = path.join(addon_base_dir, "styles", "table_view.css")
-
-        with open(css_file_path, "r") as css_file:
-            self.setStyleSheet(css_file.read())
 
         self.vocabulary_manager = vocabulary_manager
         self.sentence_table_view = sentence_table_view
