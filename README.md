@@ -13,7 +13,7 @@ It also allows you to customize your notes according to your templates, with the
 
 ## Installation
 1. **Download the Addon**:
-   - Clone this repository or download the latest release as a `.zip` file.
+   - Clone this repository.  ~~or download the latest release as a `.zip` file.~~
 
    ```bash
    git clone https://github.com/yanisju/KankiMate
@@ -55,7 +55,7 @@ To customize the addon to suit your needs:
 
 ## Contributing
 Contributions are welcome! If you have suggestions, bug reports, or feature requests, please:
-1. Open an issue on the [GitHub repository](https://github.com/yourusername/anki-japanese-vocab-addon/issues).
+1. Open an issue on the [GitHub repository](https://github.com/yanisju/KankiMate/issues).
 2. Submit a pull request with your changes.
 
 ## License
