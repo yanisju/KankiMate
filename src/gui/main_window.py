@@ -21,7 +21,7 @@ class MainWindow(QMainWindow):
         for i in range(3):
             addon_base_dir = path.dirname(addon_base_dir)
 
-        css_file_path = path.join(addon_base_dir, "styles", "group_box.css")
+        css_file_path = path.join(addon_base_dir, "styles", "dark_mode.css")
 
         with open(css_file_path, "r") as css_file:
             self.setStyleSheet(css_file.read())

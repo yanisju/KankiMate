@@ -54,13 +54,21 @@ QLineEdit::selection, QTextEdit::selection{
     border: 0px #444444;
 }
 
+
+/* ===== BUTTONS ===== */
+
 QPushButton:enabled{
     background-color: #404040;
     font-size: 20px; 
     color: #ffffffff; 
     font-family: "IPAex Mincho";
-    padding-top: 0px;
     border: 1px solid #313131;
+}
+
+QPushButton:enabled:hover {
+    background-color: #505050; 
+    border: 1px solid #313131;  
+    
 }
 
 
@@ -71,6 +79,12 @@ QPushButton:disabled {
     font-family: "IPAex Mincho";
     padding-top: 0px;        
     border: 1px solid #666666;
+}
+
+QPushButton:pressed {
+    background-color: #303030; 
+    border: 1px solid #222222; 
+    padding-top: 2px; 
 }
 
 
@@ -156,16 +170,31 @@ QMenu {
     font-size: 14px;
 }
 
+QMenuBar{
+    font-size: 18px;
+    font-family: "IPAex Mincho"; 
+}
+
 QMenu::item {
-    background-color: transparent; 
+    /* background-color: transparent;  */
     padding: 6px 20px; 
     margin: 2px 0; 
     border-radius: 3px; 
 }
 
-QMenu::item:selected {
+QMenuBar::item:selected {
     background-color: #505050; 
     color: #ffffff; 
+}
+
+QMenuBar::item:pressed { 
+    background-color: #303030;
+    color: #ffffff;
+}
+
+QMenu::item:disabled {
+    color: #777; 
+    background-color: transparent; 
 }
 
 QMenu::separator {
@@ -174,11 +203,3 @@ QMenu::separator {
     margin: 4px 10px; 
 }
 
-QMenu::item:disabled {
-    color: #777; 
-    background-color: transparent; 
-}
-
-QMenu {
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
-}

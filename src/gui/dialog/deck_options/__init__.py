@@ -75,7 +75,7 @@ class DeckOptionsDialog(QDialog):
     def _is_modified(self):
         self.modified = True
 
-        if not self.model_options.model_name_widget.text_edit.toPlainText():
+        if not self.model_options.model_name_widget.text_edit.text():
             self.confirm_button.setDisabled(True)
         else:
             self.confirm_button.setEnabled(True)

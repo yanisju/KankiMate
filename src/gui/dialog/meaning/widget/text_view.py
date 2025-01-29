@@ -14,7 +14,7 @@ class MeaningTextView(QTextEdit):
         for i in range(6):
             addon_base_dir = path.dirname(addon_base_dir)
 
-        html_file_path = path.join(addon_base_dir, "styles", "meaning", "text_view.html")
+        html_file_path = path.join(addon_base_dir, "styles", "text_view.html")
         with open(html_file_path, "r") as html_file:
             text = html_file.read()
 

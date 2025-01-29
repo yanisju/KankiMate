@@ -93,6 +93,6 @@ class CardDialog(QDialog):
         super().open()
 
     def sizeHint(self):
-        width = int(self.central_widget.parent().width() * 0.85)
-        height = int(self.central_widget.parent().height() * 0.85)
+        width = int(self.central_widget.parent().width() * 0.95)
+        height = int(self.central_widget.parent().height() * 0.95)
         return QSize(width, height)
