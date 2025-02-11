@@ -1,7 +1,6 @@
-import sys
+from aqt import mw
 
-from PyQt6.QtGui import QFont
-from PyQt6.QtWidgets import QApplication
+from PyQt6.QtCore import QCoreApplication, QSettings
 
 from .src.vocabulary.manager import VocabularyManager
 from .src.gui.main_window import MainWindow
@@ -10,33 +9,23 @@ from .src.anki import AnkiManager
 
 class App():
     def __init__(self):
-        # super().__init__(sys.argv)
         anki_manager = AnkiManager()
         self.vocabulary_manager = VocabularyManager(anki_manager)
 
         self.main_window = MainWindow(self.vocabulary_manager)
-        font = QFont()
-        font.setPointSize(11)
-        self.main_window.setFont(font)
 
+        self._init_settings()
+        
     def start(self):
         self.main_window.show()
         # sys.exit(self.exec())
 
-    def quick_init(self, words_file):
-        path = "data/input/" + words_file
-        with open(path, encoding="utf-8") as file:
-            lines = file.readlines()
-            for line in lines:
-                if line[-1] == "\n":
-                    line = line[:-1]
-                self.vocabulary_manager.add_word_quick_init(line)
-        self.start()
+    def _init_settings(self):
+        QCoreApplication.setApplicationName("KankiMate")
+        QCoreApplication.setOrganizationName("Yanisju")
 
+        config = mw.addonManager.getConfig(__name__)
+        settings = QSettings()
 
-if __name__ == "__main__":
-    app = App()
-    if len(sys.argv) > 1 and sys.argv[1] == "--quick-init":
-        app.quick_init(sys.argv[2])
-    else:
-        app.start()
+        for setting_name, setting_value in config.items():
+            settings.setValue(setting_name, setting_value)

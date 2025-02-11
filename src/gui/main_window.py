@@ -1,5 +1,7 @@
 
 from os import path
+from PyQt6.QtCore import QSettings, Qt
+from PyQt6.QtGui import QGuiApplication
 from PyQt6.QtWidgets import QMainWindow, QToolBar, QFormLayout, QLineEdit, QStatusBar
 
 from .central_widget import CentralWidget
@@ -17,18 +19,38 @@ class MainWindow(QMainWindow):
         centralWidget = CentralWidget(self, vocabulary_manager)
         self.setCentralWidget(centralWidget)
 
-        addon_base_dir = path.realpath(__file__)
-        for i in range(3):
-            addon_base_dir = path.dirname(addon_base_dir)
-
-        css_file_path = path.join(addon_base_dir, "styles", "dark_mode.css")
-
-        with open(css_file_path, "r") as css_file:
-            self.setStyleSheet(css_file.read())
+        self.set_app_theme()
 
         self._createMenu()
         # self._createToolBar()
         # self._createStatusBar()
+
+    def set_app_theme(self):
+        settings = QSettings()
+        app_theme = settings.value("theme")
+
+        addon_base_dir = path.realpath(__file__)
+        for i in range(3):
+            addon_base_dir = path.dirname(addon_base_dir)
+
+        if app_theme == "light":
+            theme_file_name = "light_theme"
+        elif app_theme == "dark":
+            theme_file_name = "dark_theme"
+        else: # System Theme
+            system_theme = QGuiApplication.styleHints().colorScheme()
+            if system_theme == Qt.ColorScheme.Light:
+                theme_file_name = "light_theme"
+            elif system_theme == Qt.ColorScheme.Dark:
+                theme_file_name = "dark_theme"
+            else: # Unknown (by default light)
+                theme_file_name = "light_theme"
+
+
+        css_file_path = path.join(addon_base_dir, "styles", theme_file_name + ".css")
+        with open(css_file_path, "r") as css_file:
+            self.setStyleSheet(css_file.read())
+
 
     def _createMenu(self):
         file = self.menuBar().addMenu("File")
