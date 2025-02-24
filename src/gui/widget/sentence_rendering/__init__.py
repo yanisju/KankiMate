@@ -19,8 +19,7 @@ class SentenceRenderingWidget(QWidget):
         # header = SentenceRenderingHeader(self)
         # layout.addWidget(header)
 
-        self.card_text_view = CardTextView(
-            CardTextViewMode.IS_MAIN_WINDOW, card_dialog)  # View for retrieved words
+        self.card_text_view = CardTextView(CardTextViewMode.IS_MAIN_WINDOW, card_dialog)  # View for retrieved words
         layout.addWidget(self.card_text_view)
 
     def sizeHint(self):

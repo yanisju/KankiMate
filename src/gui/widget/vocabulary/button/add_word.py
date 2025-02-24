@@ -49,5 +49,5 @@ class AddWordWidget(QWidget):
             QMessageBox.critical(self.parent(), "Importation Error", f"{exception}")
         except VocabularyIsNotValid as exception:
             QMessageBox.critical(self.parent(), "Importation Error", f"{exception}")
-        except Exception as e:
-            QMessageBox.critical(self.parent(), "Importation Error", f"An exception has occured: {e}")
+        # except Exception as e:
+        #     QMessageBox.critical(self.parent(), "Importation Error", f"An exception has occured: {e}")

@@ -23,7 +23,7 @@ def is_kanji(text):
     return any("\u4e00" <= char <= "\u9faf" for char in text)
 
 
-def show_transcription(view, event, sentence_len, position_kanji, kanji_data):
+def show_transcription(view, event, sentence_len: int, position_kanji, kanji_data):
     """Show a QToolTip containing furigana of the howered kanji. """
 
     cursor = view.cursorForPosition(event.pos())  # Get cursor for position
@@ -41,9 +41,12 @@ def show_transcription(view, event, sentence_len, position_kanji, kanji_data):
 
         if cursor.position() - 1 in position_kanji.keys():  # TODO: Add "and is_kanji(char) ?"
             kanji = position_kanji[cursor.position() - 1]
-            kana_transcription = kanji_data.get_kanji(kanji).reading
-
-            print_furigana(view, cursor, kana_transcription)
+            try:
+                kana_transcription = kanji_data.get_kanji(kanji).reading
+                print_furigana(view, cursor, kana_transcription)
+            except:
+                pass
+            
         else:
             QToolTip.hideText()
     else:

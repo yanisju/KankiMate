@@ -47,7 +47,7 @@ class ModelOptions(QGroupBox):
         self.modify_button_style_dialog.configure(model_style)
 
     def get_model_name(self):
-        return self.model_name_widget.text_edit.toPlainText()
+        return self.model_name_widget.text_edit.text()
         
     def get_model_parameters(self):
         model_front = self.modify_button_front_dialog.parameter_str

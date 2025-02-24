@@ -1,22 +1,19 @@
 from PyQt6.QtWidgets import QTableView, QHeaderView
 
+from ....dialog.card import CardDialog
+
 from .menu import SentenceTableViewMenu
+
+from .....constants import SentenceWidgetMode, CardDialogMode
 
 
 class SentenceTableView(QTableView):
     """Table view for the different sentences of one vocabulary."""
 
-    def __init__(
-            self,
-            central_widget,
-            vocabulary_manager,
-            card_text_view,
-            card_dialog,
-            sentence_widget_mode):
+    def __init__(self, central_widget, vocabulary_manager, card_text_view, card_dialog: CardDialog, sentence_widget_mode: SentenceWidgetMode):
         super().__init__(central_widget)
 
-        self.setEditTriggers(
-            self.EditTrigger.NoEditTriggers)  # Disable editing
+        self.setEditTriggers(self.EditTrigger.NoEditTriggers)  # Disable editing
         self.horizontalHeader().setSectionResizeMode(
             QHeaderView.ResizeMode.ResizeToContents)
         self.verticalHeader().setSectionResizeMode(
@@ -24,6 +21,8 @@ class SentenceTableView(QTableView):
 
         self.setSelectionBehavior(QTableView.SelectionBehavior.SelectItems)
         self.setSelectionMode(QTableView.SelectionMode.SingleSelection)
+
+        self.sentence_widget_mode = sentence_widget_mode
 
         self.menu = SentenceTableViewMenu(
             self,
@@ -69,11 +68,19 @@ class SentenceTableView(QTableView):
         sentence_clicked = self.model().get_sentence_by_row(row)
         self.card_text_view.set_card_view(sentence_clicked)
 
-        self.card_dialog.sentence_changed(self.model(), sentence_clicked, row)
+        if self.sentence_widget_mode == SentenceWidgetMode.VOCABULARY_SENTENCE:
+            card_dialog_mode = CardDialogMode.IS_VOCABULARY
+        elif self.sentence_widget_mode == SentenceWidgetMode.ADDED_SENTENCE:
+            card_dialog_mode = CardDialogMode.IS_ADDED
+
+        self.card_dialog.sentence_changed(self.model(), sentence_clicked, row, card_dialog_mode)
 
     def double_clicked_action(self):
         """When a sentence is double-clicked, opens a new CardDialog to edit its fields."""
-        self.card_dialog.open()
+        if self.sentence_widget_mode == SentenceWidgetMode.VOCABULARY_SENTENCE:
+            self.card_dialog.open(CardDialogMode.IS_VOCABULARY)
+        elif self.sentence_widget_mode == SentenceWidgetMode.ADDED_SENTENCE:
+            self.card_dialog.open(CardDialogMode.IS_ADDED)
 
     def resizeEvent(self, event):
         super().resizeEvent(event)

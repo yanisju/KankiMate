@@ -1,14 +1,18 @@
 from aqt import mw
 
+import sys
+
 from PyQt6.QtCore import QCoreApplication, QSettings
+from PyQt6.QtWidgets import QApplication
 
 from .src.vocabulary.manager import VocabularyManager
 from .src.gui.main_window import MainWindow
 from .src.anki import AnkiManager
 
 
-class App():
+class App(QApplication):
     def __init__(self):
+        # super().__init__([])
         anki_manager = AnkiManager()
         self.vocabulary_manager = VocabularyManager(anki_manager)
 
@@ -29,3 +33,7 @@ class App():
 
         for setting_name, setting_value in config.items():
             settings.setValue(setting_name, setting_value)
+
+if __name__ == '__main__':
+    app = App()
+    app.start()

@@ -1,5 +1,7 @@
-from .data_retriever import *
-from .vocabulary import Vocabulary
+from .retriever import *
+from .retriever.meaning.jisho import JishoMeaningRetriever
+from .retriever.meaning.jotoba import JotobaMeaningRetriever
+from . import Vocabulary
 from .sentence.manager import SentenceManager
 from .model.vocabulary import VocabularyModel
 from ..constants.exceptions import VocabularyAlreadyExists, VocabularyIsNotValid
@@ -28,6 +30,7 @@ class VocabularyManager:
 
     def __init__(self, anki_manager: AnkiManager):
         self.data_retriever = DataRetriever("jpn", "eng", RetrieverMode.LOCAL)
+        self.meaning_retriever = JotobaMeaningRetriever()
 
         self.vocabularies = {}  # Dictionnary of vocabularies instance
 
@@ -50,7 +53,7 @@ class VocabularyManager:
         try:
             self.get_index_by_word(word)
         except ValueError:
-            vocabulary = Vocabulary(word, self.data_retriever)
+            vocabulary = Vocabulary(word, self.data_retriever, self.meaning_retriever)
             vocabulary.standard_item_modified.connect(
                 self._change_vocabulary_model_item)
             self.vocabularies.update({word: vocabulary})

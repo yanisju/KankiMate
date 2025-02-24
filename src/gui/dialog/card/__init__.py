@@ -5,7 +5,7 @@ from PyQt6.QtCore import pyqtSignal
 from ...widget.card_text_view import CardTextView
 from .fields_widget import FieldsWidget
 from ....vocabulary.sentence.sentence import Sentence
-from ....constants import CardTextViewMode
+from ....constants import CardTextViewMode, CardDialogMode
 
 class CardDialog(QDialog):
     """Pop-up window for creating and editing a Anki card and its field. """
@@ -34,15 +34,16 @@ class CardDialog(QDialog):
         layout.addLayout(buttons_layout)
         self._init_buttons_layout(buttons_layout)
 
-    def _init_buttons_layout(self, layout):
+    def _init_buttons_layout(self, layout: QHBoxLayout):
         self.confirm_button = QPushButton("Confirm")
         self.confirm_and_add_button = QPushButton("Confirm and Add to Queue")
+        layout.addWidget(self.confirm_and_add_button)
+        self.confirm_and_add_button.clicked.connect(self._confirm_and_add_to_deck_clicked)
         cancel_button = QPushButton("Cancel")
         layout.addWidget(self.confirm_button)
-        layout.addWidget(self.confirm_and_add_button)
+        
         layout.addWidget(cancel_button)
-        self.confirm_and_add_button.clicked.connect(
-            self._confirm_and_add_to_deck_clicked)
+        
         self.confirm_button.clicked.connect(self._confirm_button_clicked)
         cancel_button.clicked.connect(self.reject)
 
@@ -68,11 +69,7 @@ class CardDialog(QDialog):
         self.card_view.set_card_view_from_attributes_values(
             self.fields_widget.sentence_attributes_widget.attributes_value)
 
-    def sentence_changed(
-            self,
-            sentences_model,
-            sentence: Sentence,
-            sentence_row: int):
+    def sentence_changed(self, sentences_model, sentence: Sentence, sentence_row: int, card_dialog_mode: CardDialogMode):
         if hasattr(self, "sentence"):
             self.sentence.kanji_data_list.model.itemChanged.disconnect()
         self.sentence = sentence.clone()
@@ -82,9 +79,19 @@ class CardDialog(QDialog):
         self.sentence_row = sentence_row  # Row number in the view
         self.sentences_model = sentences_model
 
-    def open(self):
+        self.mode = card_dialog_mode
+
+    def open(self, mode: CardDialogMode = CardDialogMode.UNKNOWN):
         """If Dialog is opened, dialog view and fields must be updated
         to the current sentence."""
+
+        if mode == CardDialogMode.UNKNOWN:
+            mode = self.mode
+
+        if mode == CardDialogMode.IS_VOCABULARY:
+            self.confirm_and_add_button.show()
+        else:
+            self.confirm_and_add_button.hide()
 
         # Init card view with card fields
         self.fields_widget.set_to_new_sentence(self.sentence)

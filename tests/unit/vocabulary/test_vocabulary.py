@@ -1,7 +1,7 @@
 import pytest
 
-from src.vocabulary.vocabulary import Vocabulary
-from src.vocabulary.data_retriever import DataRetriever
+from src.vocabulary import Vocabulary
+from src.vocabulary.retriever import DataRetriever
 
 from src.constants import RetrieverMode
 

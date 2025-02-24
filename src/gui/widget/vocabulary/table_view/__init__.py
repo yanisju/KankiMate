@@ -62,8 +62,6 @@ class VocabularyTableView(QTableView):
             sentence_rendering_widget,
             sentence_table_view)
         self.meaning_dialog = MeaningDialog(parent)
-        self.meaning_dialog.confirm_button_clicked_signal.connect(
-            self._meaning_dialog_confirm_action)
         self.doubleClicked.connect(self._double_clicked)
 
         # Change sentence view when a different word is selected
@@ -109,30 +107,6 @@ class VocabularyTableView(QTableView):
         row = self.currentIndex().row()
         vocabulary = self.vocabulary_manager[row]
         self.meaning_dialog.open(vocabulary)
-
-    def _meaning_dialog_confirm_action(self, model, current_selection: int):
-        """
-        Handles the confirmation of a new meaning selection from the `MeaningDialog`.
-
-        Args:
-        -----
-        model : QStandardItemModel
-            The data model containing the updated meanings.
-        current_selection : int
-            The index of the selected meaning from the dialog.
-
-        Modifies the selected vocabulary item's meaning and updates the table view.
-        """
-        row = self.currentIndex().row()
-        meaning_row = current_selection - 1
-
-        meaning, part_of_speech = model.item(
-            meaning_row, 0).text(), model.item(
-            meaning_row, 1).text()
-        self.vocabulary_manager[row].meaning_object[meaning_row] = (
-            meaning, part_of_speech)
-        self.vocabulary_manager[row].meaning_object.current_selection = current_selection
-        self.vocabulary_manager[row].set_standard_item()
 
     def _selection_changed_action(self):
         selection_row = self.currentIndex().row()

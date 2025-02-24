@@ -44,14 +44,8 @@ class SentenceModel(QStandardItemModel):
         """
         Configures the model headers to label each column.
         """
-        self.setHeaderData(
-            0,
-            Qt.Orientation.Horizontal,
-            "Sentence")
-        self.setHeaderData(
-            1,
-            Qt.Orientation.Horizontal,
-            "Meaning")
+        self.setHeaderData(0, Qt.Orientation.Horizontal, "Sentence")
+        self.setHeaderData(1, Qt.Orientation.Horizontal, "Meaning")
         self.setHeaderData(2, Qt.Orientation.Horizontal, "Word 1")
         self.setHeaderData(3, Qt.Orientation.Horizontal, "Word 2")
 

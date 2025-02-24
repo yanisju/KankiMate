@@ -15,10 +15,9 @@ class KanjiData():
 
     def get_item(self):
         return [
-            QStandardItem(
-                self.word), QStandardItem(
-                self.reading), QStandardItem(
-                self.meaning)]
+            QStandardItem(self.word), 
+            QStandardItem(self.reading), 
+            QStandardItem(self.meaning)]
 
     def update_attributes(self, word, reading, meaning):
         self.word = word

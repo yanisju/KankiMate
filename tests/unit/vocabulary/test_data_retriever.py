@@ -1,8 +1,8 @@
 import pytest
 from unittest.mock import patch
 from typing import List
-from src.vocabulary.data_retriever import DataRetriever
-from src.vocabulary.meaning.meaning import VocabularyMeaning
+from src.vocabulary.retriever import DataRetriever
+from src.vocabulary.meaning import VocabularyMeaning
 from src.vocabulary.sentence.kanji_data import KanjiDataList
 from src.constants import RetrieverMode
 

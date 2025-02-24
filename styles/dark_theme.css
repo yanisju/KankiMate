@@ -40,8 +40,7 @@ QLabel.attributes, QSpinBox, QMenuBar{
 QLineEdit, QTextEdit, QSpinBox{
     background-color: #252525;
     font-size: 20px; 
-    color: #ffffffff; 
-    
+    color: #ffffff; 
     font-family: "IPAex Mincho";
     border: 0px #444444;
 }
@@ -102,13 +101,11 @@ QTableView {
 QTableView::item {
     font-size: 20px;
     color: white;
-    user-select: white;
 }
 
 QTableView::item::selection {
     font-size: 20px;
     color: white;
-    user-select: white;
 }
 
 QHeaderView{

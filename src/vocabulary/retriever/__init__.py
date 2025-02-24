@@ -1,5 +1,5 @@
 from .kanji_data import *
-from ..meaning.retriever import *
+# from .meaning.retriever import *
 from .sentence.http import SentenceHTTPRetriever
 from .sentence.local import SentenceLocalRetriever
 
@@ -34,18 +34,18 @@ class DataRetriever():
         self.sentence_http_retriever = SentenceHTTPRetriever(self.lang_from, self.lang_to)
         self.sentence_local_retriever = SentenceLocalRetriever()
 
-    def get_data(self, word, word_meaning_object):
+    def get_data(self, word, word_meaning):
         if self.mode == RetrieverMode.HTTP:
             data = self.sentence_http_retriever.get_sentences(word)
         elif self.mode == RetrieverMode.LOCAL:
             data = self.sentence_local_retriever.get_sentences(word)
 
-        word_meaning = word_meaning_object.meaning
-        word_part_of_speech = word_meaning_object.part_of_speech
+        meaning = word_meaning.selected_meaning
+        part_of_speech = word_meaning.selected_part_of_speech
         for sentence_data in data:
             transcription = sentence_data[2]
             kanji_data = self._get_kanji_data(
-                transcription, word, word_meaning)
+                transcription, word, meaning)
             sentence_data.append(kanji_data)
         return data
 
