@@ -4,7 +4,7 @@ from PyQt6.QtCore import pyqtSignal
 
 from ...widget.card_text_view import CardTextView
 from .fields_widget import FieldsWidget
-from ....vocabulary.sentence.sentence import Sentence
+from ....vocabulary.sentence import Sentence
 from ....constants import CardTextViewMode, CardDialogMode
 
 class CardDialog(QDialog):

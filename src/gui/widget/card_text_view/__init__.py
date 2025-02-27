@@ -3,7 +3,7 @@ from os import path
 from PyQt6.QtWidgets import QTextEdit, QSizePolicy
 from PyQt6.QtCore import QSize
 
-from ....vocabulary.sentence.sentence import Sentence
+from ....vocabulary.sentence import Sentence
 from .sentences import *
 
 from ....constants import CardTextViewMode

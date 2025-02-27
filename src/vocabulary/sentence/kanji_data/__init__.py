@@ -6,7 +6,7 @@ from .kanji_data import KanjiData
 from ....constants import KanjiDataComboBoxModelMode
 
 
-class KanjiDataList(list):
+class KanjiDataList(list[KanjiData]):
     # List containing Kanjis(kanjis, reading, meaning)
 
     def __init__(self) -> None:

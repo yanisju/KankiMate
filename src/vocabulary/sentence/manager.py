@@ -1,4 +1,4 @@
-from .sentence import Sentence
+from . import Sentence
 from ..model.sentence import SentenceModel
 
 from .kanji_data import KanjiDataList

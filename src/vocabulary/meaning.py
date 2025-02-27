@@ -9,7 +9,7 @@ class VocabularyMeaning:
     A class to represent the meanings and part-of-speech information for a vocabulary word.
     """
 
-    def __init__(self, word: str, kana_reading: str, meanings: list, parts_of_speech: list, is_common: bool, jlpt_level: str, pitch_accent: VocabularyPitchAccent, pitch_pattern: list[bool], audio: str, current_selection: int = 1) -> None:
+    def __init__(self, word: str, kana_reading: str, meanings: list, parts_of_speech: list, is_common: bool, jlpt_level: str, pitch_accent: VocabularyPitchAccent, pitch_pattern: list[bool], has_audio: str, current_selection: int = 1) -> None:
         """
         Initializes the VocabularyMeaning instance.
         """
@@ -31,7 +31,7 @@ class VocabularyMeaning:
         self.pitch_accent = pitch_accent
         self.pitch_pattern = pitch_pattern
 
-        self.audio = audio
+        self.has_audio = has_audio
 
         self.current_selection = current_selection
         
@@ -91,5 +91,5 @@ class VocabularyMeaning:
                                  self.jlpt_level,
                                  self.pitch_accent,
                                  self.pitch_pattern,
-                                 self.audio,
+                                 self.has_audio,
                                  self.current_selection)

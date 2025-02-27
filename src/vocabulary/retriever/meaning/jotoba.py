@@ -27,7 +27,7 @@ class JotobaMeaningRetriever(MeaningRetriever):
             data["jlpt_level"],
             data["pitch_accent"],
             data["pitch_pattern"],
-            data["audio"]
+            data["has_audio"]
         )
 
     def _fetch_from_api(self, word: str) -> dict:
@@ -67,7 +67,7 @@ class JotobaMeaningRetriever(MeaningRetriever):
 
         pitch_accent, pitch_pattern = self._get_pitch_accent_and_pattern(word_entry)
 
-        audio = self._get_audio(word_entry, word)
+        has_audio = self._get_audio(word_entry, word)
 
         return {
             "kana_reading": kana_reading,
@@ -77,7 +77,7 @@ class JotobaMeaningRetriever(MeaningRetriever):
             "jlpt_level": self._get_jlpt_level(kanji_entry),
             "pitch_accent": pitch_accent,
             "pitch_pattern": pitch_pattern,
-            "audio": audio
+            "has_audio": has_audio
         }
 
     def _get_jlpt_level(self, word_entry: dict) -> VocabularyJLPTLevel:
@@ -122,7 +122,7 @@ class JotobaMeaningRetriever(MeaningRetriever):
 
         return pitch_accent, pitch_pattern        
 
-    def _get_audio(self, word_entry: dict, word: str) -> str:
+    def _get_audio(self, word_entry: dict, word: str) -> bool:
         audio_path = word_entry.get("audio")
         if audio_path:
             audio_url =  f"https://jotoba.de{audio_path}"
@@ -137,9 +137,9 @@ class JotobaMeaningRetriever(MeaningRetriever):
             
             try:
                 urllib.request.urlretrieve(audio_url, file_path)
-                return file_path
+                return True
             except Exception as e:
                 pass
-        return ""
+        return False
 
         

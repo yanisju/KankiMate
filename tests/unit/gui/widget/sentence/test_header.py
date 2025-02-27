@@ -3,7 +3,7 @@ from PyQt6.QtWidgets import QWidget, QPushButton, QLabel
 from src.gui.widget.sentence.header import SentenceHeader
 from src.anki import AnkiManager
 from src.vocabulary.manager import VocabularyManager
-from src.vocabulary.sentence.sentence import Sentence
+from src.vocabulary.sentence import Sentence
 from src.constants import SentenceWidgetMode
 
 @pytest.fixture

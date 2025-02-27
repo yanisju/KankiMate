@@ -1,1 +1,1 @@
-{"deck_name": "Test_kanjis", "model_name": "Sentence_test", "model_front": "{{Sentence}}", "model_back": "{{Translation}}", "model_style": "", "theme": "system"}
+{"deck_name": "Test_kanjis", "model_name": "KankiMate_Model", "model_front": "{{Sentence}}", "model_back": "{{Translation}}", "model_style": "", "theme": "system"}

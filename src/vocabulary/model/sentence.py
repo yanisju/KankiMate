@@ -1,7 +1,7 @@
 from PyQt6.QtGui import QStandardItemModel
 from PyQt6.QtCore import pyqtSignal, Qt
 
-from ..sentence.sentence import Sentence
+from ..sentence import Sentence
 
 
 class SentenceModel(QStandardItemModel):

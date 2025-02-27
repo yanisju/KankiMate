@@ -1,5 +1,5 @@
 import pytest
-from src.vocabulary.sentence.sentence import Sentence
+from src.vocabulary.sentence import Sentence
 from src.vocabulary.sentence.kanji_data import KanjiDataList
 
 @pytest.fixture
