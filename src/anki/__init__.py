@@ -78,15 +78,15 @@ class AnkiManager:
             note.model()['id'] = model['id']  
             note.model()['did'] = deck['id']  
 
-            note.fields[0] = sentence.sentence  
-            note.fields[1] = sentence.get_sentence_furigana()  
+            note.fields[0] = sentence.get_sentence_bold()  
+            note.fields[1] = sentence.get_sentence_furigana_bold()  
             note.fields[2] = sentence.translation  
             note.fields[3] = self.move_audio_file_to_collection(sentence.sentence, sentence.has_audio)
             note.fields[4] = sentence.word1_data.word 
             note.fields[5] = f"{sentence.word1_data.word}[{sentence.word1_data.reading}]"
             note.fields[6] = "" # Pitch pattern
-            note.fields[7] = sentence.vocabulary.meaning.pitch_accent.value # Pitch accent
-            note.fields[8] = sentence.word1_data.meaning # VocabDef
+            note.fields[7] = str(sentence.vocabulary.meaning.pitch_accent.value) # Pitch accent
+            note.fields[8] = str(sentence.word1_data.meaning) # VocabDef
             note.fields[9] = self.move_audio_file_to_collection(sentence.word1_data.word, sentence.vocabulary.meaning.has_audio) # VocabAudio
 
             if sentence.word2_data:
@@ -108,26 +108,22 @@ class AnkiManager:
         if not has_audio:
             return ""
 
-        # Déterminer le chemin du dossier parent deux niveaux au-dessus
         base_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))  # Remonte 2 niveaux
         audio_file_name = f"{name}_audio.mp4"
         audio_file_path = os.path.join(base_dir, "data", "temp", "audio", audio_file_name)
 
-        # Vérifier si le fichier existe avant de le déplacer
+
         if not os.path.exists(audio_file_path):
             showInfo(f"Erreur : le fichier audio n'existe pas -> {audio_file_path}")
             return ""
-
-        # Récupérer le dossier media d'Anki
+        
         media_folder = mw.col.media.dir()
         destination_path = os.path.join(media_folder, audio_file_name)
-
-        showInfo(f"Déplacement du fichier :\n{audio_file_path}\n→ {destination_path}")  # Debug
 
         try:
             # Déplacer le fichier
             shutil.move(audio_file_path, destination_path)
-            return destination_path
+            return f"[sound:{audio_file_name}]"
         except Exception as e:
             showInfo(f"Erreur lors du déplacement : {e}")
             return ""
