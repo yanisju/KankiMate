@@ -57,7 +57,7 @@ class KanjiDataList(list[KanjiData]):
         self.first_combobox_model.insertRow(row, kanji_data)
         self.second_combobox_model.insertRow(row, kanji_data)
 
-    def remove_by_row(self, row: int):
+    def remove_by_row(self, row: int) -> KanjiData:
         row_deleted = self.pop(row)
         self.model.remove(row)
         self.first_combobox_model.takeRow(row)
@@ -70,7 +70,7 @@ class KanjiDataList(list[KanjiData]):
         # TODO: check if kanji already exists + remove from model
         row = self._find_kanji_index(kanji)
         if row != -1:
-            self.remove_by_row(row)
+            return self.remove_by_row(row)
         else:
             raise IndexError
 

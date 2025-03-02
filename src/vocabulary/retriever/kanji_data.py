@@ -62,6 +62,8 @@ def find_kanjis_in_dict(kanjis_data: dict, kanji_to_find: str):
 
 def get_kanji_reading_meaning_position(sentence: str):
     pattern = r'\[([^\|\[\]]+)\|([^\[\]]+)\]'
+    if sentence == None:
+        pass
     result = re.findall(pattern, sentence)
     kanji_data = KanjiDataList()
     for match in result:

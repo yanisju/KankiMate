@@ -56,9 +56,11 @@ class Vocabulary(QObject):
             self.word, self.meaning)  # Retrieve sentences from DataRetriever
 
         for one_sentence_data in sentences_data:
-            sentence, translation, transcription, kanji_data = one_sentence_data
-            self.sentence_manager.append_from_sentence_data(
-                sentence, translation, kanji_data)
+            try:
+                sentence, translation, transcription, kanji_data = one_sentence_data
+                self.sentence_manager.append_from_sentence_data(sentence, translation, kanji_data)
+            except BaseException:
+                pass
         self.sentence_manager.sort_by_sentence_length()
 
     def update_meaning(self, meaning_model: QStandardItemModel, selection: int, is_common: bool, jlpt_level: VocabularyJLPTLevel, pitch_accent: VocabularyPitchAccent, pitch_pattern: list[bool]):

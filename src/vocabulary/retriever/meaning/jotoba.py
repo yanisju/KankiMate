@@ -55,19 +55,32 @@ class JotobaMeaningRetriever(MeaningRetriever):
                 "kana_reading": "No reading found",
                 "parts_of_speech": ["Unknown"],
                 "is_common": False,
-                "jlpt_level": "Unknown",
+                "jlpt_level": VocabularyJLPTLevel.UNKNOWN,
                 "pitch_accent": VocabularyPitchAccent.UNKNOWN,
-                "pitch_pattern": []
+                "pitch_pattern": [],
+                "has_audio": False,
             }
         kanji_entry = data["kanji"][0]
         word_entry = data["words"][0]
         kana_reading = word_entry["reading"]["kana"]
         meanings = [", ".join(sense["glosses"]) for sense in word_entry.get("senses", [])]
-        parts_of_speech = [", ".join(pos.keys()) for sense in word_entry.get("senses", []) for pos in sense.get("pos", [])]
+        parts_of_speech = []
+
+        for sense in word_entry.get("senses", []):
+            for pos in sense.get("pos", []):
+                try:
+                    if isinstance(pos, dict):
+                        parts_of_speech.append(", ".join(pos.keys()))
+                    elif isinstance(pos, str): 
+                        parts_of_speech.append(pos)
+                except Exception as e:
+                    pass
+
 
         pitch_accent, pitch_pattern = self._get_pitch_accent_and_pattern(word_entry)
 
         has_audio = self._get_audio(word_entry, word)
+        pass
 
         return {
             "kana_reading": kana_reading,

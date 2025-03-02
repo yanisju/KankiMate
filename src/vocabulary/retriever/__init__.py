@@ -44,9 +44,9 @@ class DataRetriever():
         part_of_speech = word_meaning.selected_part_of_speech
         for sentence_data in data:
             transcription = sentence_data[2]
-            kanji_data = self._get_kanji_data(
-                transcription, word, meaning)
-            sentence_data.append(kanji_data)
+            if transcription:
+                kanji_data = self._get_kanji_data(transcription, word, meaning)
+                sentence_data.append(kanji_data)
         return data
 
     def _get_kanji_data(self, transcription, word: str, word_meaning: str):

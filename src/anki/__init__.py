@@ -92,15 +92,11 @@ class AnkiManager:
             if sentence.word2_data:
                 note.fields[10] = sentence.word2_data.word  
                 note.fields[11] = f"{sentence.word2_data.word}[{sentence.word2_data.reading}]"
-                note.fields[12] = ""
-                note.fields[13] = ""
-                note.fields[14] = sentence.word2_data.meaning
+                note.fields[13] = sentence.word2_data.meaning
 
             col.addNote(note)
 
         col.save()
-
-        showInfo(sentence.get_sentence_furigana())
 
         showInfo("Toutes les notes ont été ajoutées avec succès.")
 

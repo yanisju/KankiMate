@@ -124,8 +124,14 @@ class Sentence:
         vocabulary, sentence, translation, kanji_data_list, word1_data, word2_data = (
             self.vocabulary, self.sentence, self.translation, self.kanji_data_list, self.word1_data, self.word2_data
         )
-        word1 = word1_data[0] if word1_data else None
-        word2 = word2_data[0] if word2_data else None
+        if word1_data:
+            word1, *_ = word1_data
+        else:
+            word1 = None
+        if word2_data:
+            word2, *_ = word2_data
+        else:
+            word2 = None
 
         new_kanji_data = kanji_data_list.clone()
         return Sentence(vocabulary, sentence, translation, new_kanji_data, word1, word2)
