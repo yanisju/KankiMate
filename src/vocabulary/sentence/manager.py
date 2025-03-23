@@ -61,3 +61,11 @@ class SentenceManager(list):
     def clear(self):
         super().clear()
         self.sentences_model.remove_all_rows()
+
+    def update_meaning(self, new_vocabulary_meaning: str):
+        """
+        Update meaning of related vocabulary in kanjis list.
+        """
+
+        for sentence in self:
+            sentence.kanji_data_list.update_kanji_meaning(self.vocabulary.word, new_vocabulary_meaning)

@@ -7,3 +7,4 @@ data/output/*.*
 venv
 .coverage
 data/temp/audio/*.mp4
+meta.json

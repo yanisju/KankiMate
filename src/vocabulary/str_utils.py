@@ -1,8 +1,7 @@
 from re import match
-# from .sentence.kanji_data import KanjiDataList
 
 def is_word_romaji_kana_or_kanji(word: str) -> bool: 
-    pattern = r'^[\u0041-\u005A\u0061-\u007A\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FFF\uFF66-\uFF9F]+$'
+    pattern = r'^[\u0041-\u005A\u0061-\u007A\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FFF\uFF66-\uFF9F々]+$'
     
     return bool(match(pattern, word))
 

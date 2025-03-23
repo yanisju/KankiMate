@@ -48,6 +48,7 @@ class CardDialog(QDialog):
         cancel_button.clicked.connect(self.reject)
 
     def _confirm_and_add_to_deck_clicked(self):
+        self._update_sentence_attributes()
         self.vocabulary_manager.add_sentence_to_deck(self.sentence)
         self._confirm_button_clicked()
 

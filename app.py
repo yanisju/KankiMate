@@ -1,30 +1,22 @@
 from aqt import mw
 
-import sys
-
 from PyQt6.QtCore import QCoreApplication, QSettings
 from PyQt6.QtWidgets import QApplication
 
 from .src.vocabulary.manager import VocabularyManager
 from .src.gui.main_window import MainWindow
-from .src.anki import AnkiManager
 
 
 class App(QApplication):
     def __init__(self):
         super().__init__([])
-        anki_manager = AnkiManager()
-        self.vocabulary_manager = VocabularyManager(anki_manager)
+        self.vocabulary_manager = VocabularyManager()
 
         self.main_window = MainWindow(self.vocabulary_manager)
-
-        self.start()
-
-        self._init_settings()
         
     def start(self):
         self.main_window.show()
-        sys.exit(self.exec())
+        # sys.exit(self.exec())
 
     def _init_settings(self):
         QCoreApplication.setApplicationName("KankiMate")

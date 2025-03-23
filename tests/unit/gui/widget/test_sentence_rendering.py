@@ -6,7 +6,6 @@ from src.gui.widget.sentence_rendering.header import SentenceRenderingHeader
 from src.gui.dialog.card import CardDialog
 from src.gui.widget.card_text_view import CardTextView
 from src.vocabulary.manager import VocabularyManager
-from src.anki import AnkiManager
 
 
 @pytest.fixture
@@ -15,8 +14,7 @@ def parent_widget():
 
 @pytest.fixture
 def card_dialog(parent_widget):
-    anki_manager = AnkiManager()
-    vocabulary_manager = VocabularyManager(anki_manager)
+    vocabulary_manager = VocabularyManager()
     return CardDialog(parent_widget, vocabulary_manager)
 
 @pytest.fixture

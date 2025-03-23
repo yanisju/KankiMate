@@ -132,15 +132,16 @@ class KanjiDataList(list[KanjiData]):
                 new_meaning += data_meaning
             self.add(word, new_reading, new_meaning)
 
-    def update_kanji_meaning(self, kanji: str, meaning: str):
+    def update_kanji_meaning(self, kanji: str, meaning: str) -> bool:
         row = self._find_kanji_index(kanji)
         if row != -1:
             self[row].meaning = meaning
             self.model.modify_row(row, self[row])
             self.first_combobox_model.modify_row(row, self[row])
             self.second_combobox_model.modify_row(row, self[row])
+            return True
         else:
-            raise IndexError
+            return False
 
     def merge_kanjis(self, rows):
         kanji_merged_data = ["", "", ""]

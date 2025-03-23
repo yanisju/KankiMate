@@ -84,6 +84,8 @@ class Vocabulary(QObject):
         self.meaning.pitch_pattern = pitch_pattern
         self.set_standard_item()
 
+        self.sentence_manager.update_meaning(meanings[selection - 1])
+
     def remove_sentence(self, row):
         """
         Deletes a sentence from the sentences list based on its position.

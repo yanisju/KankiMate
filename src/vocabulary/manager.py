@@ -28,7 +28,7 @@ class VocabularyManager:
         A model for managing sentences that are supposed to be added to Anki deck.
     """
 
-    def __init__(self, anki_manager: AnkiManager):
+    def __init__(self):
         self.data_retriever = DataRetriever("jpn", "eng", RetrieverMode.LOCAL)
         self.meaning_retriever = JotobaMeaningRetriever()
 
@@ -36,8 +36,6 @@ class VocabularyManager:
 
         self.vocabulary_model = VocabularyModel()  # Model for retrieved words
         self.sentence_added_to_deck = SentenceManager()
-
-        self.anki_manager = anki_manager
 
     def add_word(self, word: str):
         """
@@ -97,7 +95,7 @@ class VocabularyManager:
         return list(self.vocabularies).index(word)
 
     def generate_deck(self):
-        self.anki_manager.add_to_deck(self.sentence_added_to_deck)
+        AnkiManager.add_to_deck(self.sentence_added_to_deck)
 
     def _change_vocabulary_model_item(self, word: str, standard_item):
         index = self.get_index_by_word(word)

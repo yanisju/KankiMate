@@ -25,6 +25,5 @@ class SentenceHeader(QWidget):
             self.generate_deck_button = GenerateDeckButton(self, vocabulary_manager)
             layout.addWidget(self.generate_deck_button)
 
-            self.deck_options_button = DeckOptionsButtons(
-                self, vocabulary_manager.anki_manager)
+            self.deck_options_button = DeckOptionsButtons(self)
             layout.addWidget(self.deck_options_button)
